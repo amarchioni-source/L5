@@ -7,32 +7,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f1ee;--card:#fff;--ink:#26221f;--mute:#7d746d;--line:#ebe5df;
---c1:#7c5cff;--c1l:#efeaff;--c2:#ff8a3d;--c2l:#fff0e2;--c3:#2bb3a3;--c3l:#e3f6f3;--c4:#e2568b;--c4l:#fdeaf1;--c5:#8a8078;--red:#e5484d;--redl:#fdecec;
+--c1:#7c5cff;--c1l:#efeaff;--c2:#ff8a3d;--c2l:#fff0e2;--c3:#2bb3a3;--c3l:#e3f6f3;--c4:#e2568b;--c4l:#fdeaf1;--c5:#8a8078;--red:#e5484d;--redl:#fdecec;--c6:#3b82f6;--c6l:#e6f0ff;--ok:#1f9d6b;--okl:#e2f6ec;--pr:#b7791f;--prl:#fff4d6;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171514;--card:#242120;--ink:#f2ede8;--mute:#aaa099;--line:#3a3532;--c1l:#2e2850;--c2l:#4a3220;--c3l:#1d3d38;--c4l:#4a2233;--redl:#4a2326}}
-:root[data-theme="dark"]{--bg:#171514;--card:#242120;--ink:#f2ede8;--mute:#aaa099;--line:#3a3532;--c1l:#2e2850;--c2l:#4a3220;--c3l:#1d3d38;--c4l:#4a2233;--redl:#4a2326}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171514;--card:#242120;--ink:#f2ede8;--mute:#aaa099;--line:#3a3532;--c1l:#2e2850;--c2l:#4a3220;--c3l:#1d3d38;--c4l:#4a2233;--redl:#4a2326;--c6l:#1f2f4d;--okl:#1b3d2f;--pr:#f0b84a;--prl:#4a3a14}}
+:root[data-theme="dark"]{--bg:#171514;--card:#242120;--ink:#f2ede8;--mute:#aaa099;--line:#3a3532;--c1l:#2e2850;--c2l:#4a3220;--c3l:#1d3d38;--c4l:#4a2233;--redl:#4a2326;--c6l:#1f2f4d;--okl:#1b3d2f;--pr:#f0b84a;--prl:#4a3a14}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + var(--hh,90px) + 10px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}
-main{max-width:1180px;margin:0 auto;padding:22px 16px 56px}
-.hero{position:relative;overflow:hidden;border-radius:24px;padding:38px 32px 30px;color:#fff;background:radial-gradient(circle at 85% 15%,rgba(255,255,255,.28),transparent 42%),radial-gradient(circle at 10% 110%,rgba(255,106,61,.7),transparent 50%),linear-gradient(125deg,#4b2fe0,#a73bd0 58%,#ff5f7a)}
+main{max-width:1180px;margin:0 auto;padding:0 16px 56px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);padding:10px 0 10px}
+.intro{margin:6px 4px 0;max-width:80ch;font-size:14px;color:var(--mute)}
+.hero{position:relative;border-radius:18px;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 20px;color:#fff;background:radial-gradient(circle at 85% 15%,rgba(255,255,255,.28),transparent 42%),radial-gradient(circle at 10% 110%,rgba(255,106,61,.7),transparent 50%),linear-gradient(125deg,#4b2fe0,#a73bd0 58%,#ff5f7a)}
 .eyebrow{font-size:12px;font-weight:600;letter-spacing:.16em;opacity:.9}
-.hero h1{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(30px,6vw,56px);line-height:1.05;margin:10px 0 10px;letter-spacing:-.02em}
-.hero h1 em{font-style:normal;background:#fff;color:#c02f6b;padding:0 12px;border-radius:12px;display:inline-block;transform:rotate(-1.5deg)}
-.hero p{margin:0 0 24px;max-width:60ch;font-size:16px;opacity:.95}
-.stats{display:flex;flex-wrap:wrap;gap:12px}
-.stat{background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:12px 18px;min-width:130px}
-.stat b{display:block;font-family:Poppins,sans-serif;font-size:34px;font-weight:800;line-height:1}
-.stat span{font-size:12px;opacity:.92}
+.hero h1{font-family:Poppins,sans-serif;font-weight:800;font-size:clamp(20px,3.4vw,30px);line-height:1.1;margin:3px 0 0;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;background:#fff;color:#c02f6b;padding:0 9px;border-radius:8px;display:inline-block;transform:rotate(-1.5deg)}
+.hero .eyebrow{font-size:10.5px}
+.subbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:8px 4px 0}
+.subbar .sl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-right:2px}
+.sb{display:inline-flex;align-items:center;gap:8px;padding:5px 13px;border-radius:999px;background:var(--card);color:var(--ink);border:1.5px solid var(--a);font:600 12.5px Inter,system-ui,sans-serif;text-decoration:none;transition:background .15s,color .15s}
+.sb::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--a)}
+.sb:hover,.sb:focus-visible{background:var(--a);color:#fff}
+.sb:hover::before,.sb:focus-visible::before{background:#fff}
+.navwrap{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.hint{font-size:10.5px;font-weight:600;letter-spacing:.04em;opacity:.92}
+.stats{display:flex;flex-wrap:wrap;gap:8px}
+.go{font-style:normal;font-weight:700;font-size:14px;line-height:1;opacity:.85;transition:transform .15s}
+.stat:hover .go{transform:translateY(2px)}
+.stat{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:7px 12px;color:#fff;text-decoration:none;cursor:pointer;transition:background .15s,transform .15s}
+.stat:hover{background:rgba(255,255,255,.32);transform:translateY(-1px)}
+.stat:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.stat b{font-family:Poppins,sans-serif;font-size:22px;font-weight:800;line-height:1}
+.stat span{font-size:11.5px;line-height:1.15;max-width:92px;opacity:.95}
 h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;display:flex;align-items:center;gap:10px}
 .card{background:var(--card);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow-x:auto}
-.grid{min-width:900px}
-.hdr{display:grid;grid-template-columns:400px 1fr;border-bottom:1px solid var(--line);font-size:11px;color:var(--mute);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-.hdr div{padding:11px 18px}.hdr .flow{display:flex;justify-content:space-between}
-.grp{padding:13px 18px;font-family:Poppins,sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;gap:10px}
-.row{display:grid;grid-template-columns:400px 1fr;align-items:center;border-top:1px solid var(--line);min-height:44px}
-.name{padding:8px 16px 8px 30px;font-size:13px;line-height:1.35}
-.name small{display:block;color:var(--mute);font-size:11px;margin-top:3px}
+.grid{min-width:840px}
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) 280px;border-bottom:1px solid var(--line);font-size:12px;color:var(--mute);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.hdr div{padding:12px 18px}.hdr .flow{display:flex;justify-content:space-between}
+.grp{padding:14px 18px;font-family:Poppins,sans-serif;font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 280px;align-items:center;border-top:1px solid var(--line);min-height:54px}
+.name{padding:11px 18px 11px 30px;font-size:15.5px;line-height:1.4}
+.name small{display:block;color:var(--mute);font-size:13px;line-height:1.45;margin-top:4px}
 .track{position:relative;height:26px;margin-right:18px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(100%/12 - 1px),var(--line) calc(100%/12 - 1px),var(--line) calc(100%/12))}
 .bar{position:absolute;top:1px;height:24px;border-radius:12px;transform-origin:left;box-shadow:0 3px 10px -2px var(--sh);animation:grow .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i)*45ms)}
 .bar.dash{background:transparent!important;border:2px dashed;box-shadow:none}
@@ -60,31 +75,53 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 .legend{display:flex;flex-wrap:wrap;gap:16px;margin:14px 4px 0;font-size:12.5px;color:var(--mute)}
 .legend span{display:flex;align-items:center;gap:6px}
 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
-@media (max-width:720px){.tr{grid-template-columns:1fr}.arr{transform:rotate(90deg)}}
-@media (prefers-reduced-motion:reduce){.bar,.tag{animation:none}}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pl{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-style:normal;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
+.pl.d{color:var(--c4);background:var(--c4l);border-color:var(--c4)}
+.pl.l{color:var(--c6);background:var(--c6l);border-color:var(--c6)}
+.pl.p{color:var(--pr);background:var(--prl);border-color:var(--pr)}
+.pl.t{color:#fff;background:var(--red);border-color:var(--red)}
+.pl.c{color:var(--ok);background:var(--okl);border-color:var(--ok)}
+@media (max-width:720px){.tr{grid-template-columns:1fr}.arr{transform:rotate(90deg)}.hero{padding:10px 14px}.hero .eyebrow{display:none}.subbar{flex-wrap:nowrap;overflow-x:auto}.sb{flex:none;white-space:nowrap}.navwrap{width:100%;align-items:flex-start}.stats{flex-wrap:nowrap;overflow-x:auto;width:100%}.stat{flex:none}.stat span{max-width:none;white-space:nowrap}}
+@media (prefers-reduced-motion:reduce){.bar,.tag{animation:none}html{scroll-behavior:auto}.stat{transition:none}}
 </style>
 </head>
 <body>
 <main>
+<header class="top" id="top">
 <section class="hero">
+<div>
 <div class="eyebrow">ADETRIS L5 · PLAN DE IMPLEMENTACIÓN</div>
 <h1>Hacia el <em>fin de Twins</em></h1>
-<p>Todo lo que necesitamos desarrollar para programar y producir cuartos 100% en L5.</p>
-<div class="stats" id="stats"></div>
+</div>
+<div class="navwrap"><div class="hint">👇 Toque un recuadro para ir a esa sección</div><nav class="stats" id="stats" aria-label="Ir a una sección"></nav></div>
 </section>
+<div class="subbar" id="sub">
+<span class="sl">Ir a:</span>
+<a class="sb" href="#b-c1" style="--a:var(--c1)">Forma de programar</a>
+<a class="sb" href="#b-c2" style="--a:var(--c2)">Detalles al programar</a>
+<a class="sb" href="#b-c3" style="--a:var(--c3)">Guardia de la despo</a>
+</div>
+</header>
+<p class="intro">Todo lo que necesitamos desarrollar para programar y producir cuartos 100% en L5.</p>
 
-<h2 class="sec">🗺️ El plan, bloque por bloque</h2>
+<h2 class="sec" id="plan">🗺️ El plan, bloque por bloque</h2>
 <div class="card"><div class="grid" id="chart"></div></div>
 <div class="legend">
 <span><i class="dot" style="background:var(--c1)"></i>Forma de programar</span>
 <span><i class="dot" style="background:var(--c2)"></i>Detalles al programar</span>
 <span><i class="dot" style="background:var(--c3)"></i>Guardia de la despo</span>
-<span><i class="dot" style="border:2px dashed var(--c5)"></i>Tema a charlar</span>
+<span><i class="dot" style="border:2px dashed var(--c5)"></i>Cuestión a definir</span>
 <span>⭐ Hoy se hace por Twins</span>
+<span><i class="pl d">Diseño</i>cómo se ve y se usa</span>
+<span><i class="pl l">Lógica</i>cómo decide el sistema</span>
+<span><i class="pl p">En proceso</i>conversado con producción</span>
+<span><i class="pl t">Elimina Twins</i></span>
+<span><i class="pl c">✓ Ya en colgados</i></span>
 <span style="font-style:italic">Sin fechas: el orden de las barras es referencial.</span>
 </div>
 
-<h2 class="sec">⭐ Hoy solo se puede hacer por Twins</h2>
+<h2 class="sec" id="twins">⭐ Hoy solo se puede hacer por Twins</h2>
 <div class="twins">
 <div class="top">Lo que hoy sale por Twins <span>y lo que necesitamos para dejarlo</span></div>
 <div id="tw"></div>
@@ -96,33 +133,34 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 <div class="okc"><div class="ck">✓</div><div><b>Varios para configurar</b><span>Se pueden seleccionar múltiples.</span></div></div>
 </div>
 
-<section class="goal">
+<section class="goal" id="objetivo">
 <div class="eyebrow">OBJETIVO FINAL</div>
 <h3>Una vez desarrollado y probado todo, el matcheo de planificación y prioridades de ventas <em>a través de IA</em> 🎯</h3>
 </section>
 </main>
 <script>
 var T='<small>',E='</small>';
+function pills(m){var s='<div class="pills"><span class="pl '+(m.charAt(0)==='D'?'d">Diseño':'l">Lógica')+'</span>';if(m.indexOf('P')>0)s+='<span class="pl p">En proceso · Conversado con producción</span>';if(m.indexOf('T')>0)s+='<span class="pl t">Elimina Twins</span>';if(m.indexOf('C')>0)s+='<span class="pl c">✓ Ya en colgados</span>';return s+'</div>'}
 var G=[
-{k:'c1',t:'1. Forma de programar',r:[
-'Desvíos por alternativa se descuentan de lo asignado'+T+'El cuarto se asigna a una venta al ingresar; si sale por alternativa, no se descuenta de lo asignado. Ej: la venta pide 100, salen 10 por alternativa, se pesan 90, pero el sistema la marca “completa” y no permite asignar los 10 faltantes. Se pide que lo que salió por alternativa se descuente de lo asignado y permita seguir asignando hasta completar realmente la venta.'+E,
+{k:'c1',m:['L','L','LP','D','D','L','L','LT','LTC','L'],t:'1. Forma de programar',r:[
+'Desvíos por alternativa se descuenten de lo asignado'+T+'El cuarto se asigna a una venta al ingresar; si sale por alternativa, no se descuenta de lo asignado. Ej: la venta pide 100, salen 10 por alternativa, se pesan 90, pero el sistema la marca “completa” y no permite asignar los 10 faltantes. Se pide que lo que salió por alternativa se descuente de lo asignado y permita seguir asignando hasta completar realmente la venta.'+E,
 'Resolver un mismo cuarto asignado a dos genéricos diferentes'+T+'Un mismo cuarto califica para dos genéricos y se asigna a ambas ventas. Ej: nalga con tapa y nalga sin tapa. Se pide poder ponerles prioridades para que el mismo cuarto no se asigne a ambas.'+E,
+'Que el sistema devuelva planes de salida para ordenar a producción',
 'Filtro de calificación en la cabecera de los planes',
 'Lupa en la cabecera del plan para buscar cuartos y seleccionarlos simultáneamente',
 'Programar filtrando por calificación (combinable con tropa/fecha)',
 'Examinar en profundidad la explosión de genéricos (genéricos nivel 1, nivel 2, etc.)',
 '⭐ Planes varios con fecha anterior, para imprenta en reject y block',
-'Que el sistema devuelva planes de salida para ordenar a producción',
 '⭐ Configuración de cortes a través de planes varios',
 '⭐ Programación del cuarteo <span class="tag">DESARROLLAR PARA ELIMINAR TWINS</span>']},
-{k:'c2',t:'2. Detalles al programar',r:[
+{k:'c2',m:['LC','D','D','D','LT','D'],t:'2. Detalles al programar',r:[
 'Programar por fecha de faena',
 'Shipment al lado del número de pedido en ventas programadas',
 'Seleccionar ventas para eliminarlas',
 'Ventas programadas y completas en color rojo',
 '⭐ Reever la sincronización de ventas y del sistema (todo lo que no sincroniza sale por Twins)',
 'Filtrar por tropa al hacer faroles']},
-{k:'c3',t:'3. Guardia de la despo',r:[
+{k:'c3',m:['D','D','D','D','L','D','D'],t:'3. Guardia de la despo',r:[
 'Reporte con shipment, pedido, prioridad, programado, asignado, primarias emitidas, desvíos y rotuladas',
 'Imprenta similar a Twins: producción ve primarias emitidas por pedido',
 'Producción puede filtrar por código',
@@ -130,7 +168,7 @@ var G=[
 'Reever la eliminación de primarias',
 'Ingreso despostada: codbar, tropa, amparo y fecha de faena en columnas separadas',
 'Alertas de error claras (ej. venta superada por peso)']},
-{k:'c5',t:'Temas a charlar',dash:1,r:[
+{k:'c5',m:['L','L'],t:'Cuestiones a definir',dash:1,r:[
 'Lógica del sistema al pesar cortes calibrados (tapa de cuadril, lomo)',
 'Forma más eficiente de programar cuartos, con restricciones de sala chica y sala grande y recortes']}];
 var W=[
@@ -142,18 +180,21 @@ var W=[
 var dev=0,h='<div class="hdr"><div>Punto</div><div class="flow"><span>Primero</span><span>Después</span></div></div>',idx=0;
 G.forEach(function(g){
 var n=g.r.length,span=4,max=12-span;if(!g.dash)dev+=n;
-h+='<div class="grp" style="background:var(--'+(g.dash?'line':g.k+'l')+');color:var(--'+(g.dash?'mute':g.k)+')">'+g.t+'</div>';
+h+='<div class="grp"'+(g.dash?'':' id="b-'+g.k+'"')+' style="background:var(--'+(g.dash?'line':g.k+'l')+');color:var(--'+(g.dash?'mute':g.k)+')">'+g.t+'</div>';
 g.r.forEach(function(x,i){
 var s=n>1?Math.round(i*max/(n-1)):0,a=g.dash?'':'background:linear-gradient(90deg,var(--'+g.k+'),color-mix(in srgb,var(--'+g.k+') 65%,#fff));';
-h+='<div class="row"><div class="name">'+x+'</div><div class="track"><div class="bar'+(g.dash?' dash':'')+'" style="--i:'+(idx++)+';--sh:var(--'+g.k+');'+a+'left:calc('+s+'*100%/12 + 2px);width:calc('+span+'*100%/12 - 4px);border-color:var(--'+g.k+')"></div></div></div>';});});
+h+='<div class="row"><div class="name">'+x+pills(g.m[i])+'</div><div class="track"><div class="bar'+(g.dash?' dash':'')+'" style="--i:'+(idx++)+';--sh:var(--'+g.k+');'+a+'left:calc('+s+'*100%/12 + 2px);width:calc('+span+'*100%/12 - 4px);border-color:var(--'+g.k+')"></div></div></div>';});});
 document.getElementById('chart').innerHTML=h;
 document.getElementById('tw').innerHTML=W.map(function(w){return '<div class="tr"><div class="hoy"><i>⭐</i>'+w[0]+'</div><div class="arr">→</div><div class="need">'+w[1]+'</div></div>'}).join('');
-var S=[[dev,'desarrollos a completar'],[3,'bloques de trabajo'],[W.length,'procesos hoy en Twins'],[1,'objetivo: IA']];
+var S=[[dev,'desarrollos a completar','#plan'],[3,'bloques de trabajo','#plan'],[W.length,'procesos hoy en Twins','#twins'],[1,'objetivo: IA','#objetivo']];
 var box=document.getElementById('stats');
-S.forEach(function(s){var d=document.createElement('div');d.className='stat';d.innerHTML='<b>0</b><span>'+s[1]+'</span>';box.appendChild(d);
+S.forEach(function(s){var d=document.createElement('a');d.className='stat';d.href=s[2];d.title='Ir a esta sección';d.innerHTML='<b>0</b><span>'+s[1]+'</span><i class="go">↓</i>';box.appendChild(d);
 var b=d.firstChild,red=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 if(red){b.textContent=s[0];return}
 var t0=null;function f(t){if(!t0)t0=t;var p=Math.min((t-t0)/1100,1);b.textContent=Math.round(s[0]*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)});
+var hd=document.getElementById('top');
+function setH(){document.documentElement.style.setProperty('--hh',hd.offsetHeight+'px')}
+setH();window.addEventListener('resize',setH);window.addEventListener('load',setH);
 </script>
 </body>
 </html>
