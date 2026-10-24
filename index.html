@@ -83,8 +83,12 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 .legend span{display:flex;align-items:center;gap:6px}
 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
 .note{margin:-2px 4px 12px;font-size:13px;color:var(--mute);display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
-.note button{font:600 12px Inter,system-ui,sans-serif;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
-.note button:hover{border-color:var(--mute)}
+.note button{display:inline-flex;align-items:center;gap:8px;font:700 14px Poppins,Inter,system-ui,sans-serif;border:0;color:#fff;background:linear-gradient(110deg,#4b2fe0,#a73bd0 60%,#ff5f7a);padding:10px 20px;border-radius:999px;cursor:pointer;box-shadow:0 6px 16px -4px rgba(167,59,208,.6);transition:transform .15s,box-shadow .15s}
+.note button:hover{transform:translateY(-1px);box-shadow:0 8px 20px -4px rgba(167,59,208,.75)}
+.note button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.ar{display:inline-block;letter-spacing:-.12em;animation:nudge 1.2s ease-in-out infinite}
+.note button.all .ar{animation:none}
+@keyframes nudge{50%{transform:translateX(5px)}}
 .gr{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;border-top:1px solid var(--line);border-left:6px solid var(--cc);min-height:68px;cursor:pointer;transition:background .15s}
 .gr.dr{border-left-style:dashed}
 .gr:hover{background:rgba(127,127,127,.07)}
@@ -114,7 +118,7 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 .pl.t{color:#fff;background:var(--red);border-color:var(--red)}
 .pl.c{color:var(--ok);background:var(--okl);border-color:var(--ok)}
 @media (max-width:720px){.tr{grid-template-columns:1fr}.arr{transform:rotate(90deg)}.hero{padding:10px 14px}.hero .eyebrow{display:none}.goalline{display:none}.intro-goal{display:inline-flex}.subbar{flex-wrap:nowrap;overflow-x:auto}.sb{flex:none;white-space:nowrap}.navwrap{width:100%;align-items:flex-start}.stats{flex-wrap:nowrap;overflow-x:auto;width:100%}.stat{flex:none}.stat span{max-width:none;white-space:nowrap}}
-@media (prefers-reduced-motion:reduce){.bar,.gbar,.tag,.goalline,.intro-goal{animation:none}html{scroll-behavior:auto}.stat{transition:none}}
+@media (prefers-reduced-motion:reduce){.bar,.gbar,.tag,.goalline,.intro-goal,.ar{animation:none}html{scroll-behavior:auto}.stat{transition:none}}
 </style>
 </head>
 <body>
@@ -139,7 +143,7 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 <p class="intro">Todo lo que necesitamos desarrollar para programar y producir cuartos 100% en L5.</p>
 
 <h2 class="sec" id="plan">🗺️ El plan, bloque por bloque</h2>
-<div class="note"><span>Cada bloque es un desplegable: toque su fila o el botón «Abrir» para ver los puntos, y tóquelo de nuevo para cerrarlo.</span><button id="tgl" type="button">Expandir todo</button></div>
+<div class="note"><button id="tgl" type="button">Expandir todo para ver detalles <span class="ar">&gt;&gt;</span></button><span>Cada bloque es un desplegable: toque su fila o el botón «Abrir» para ver los puntos, y tóquelo de nuevo para cerrarlo.</span></div>
 <div class="card"><div class="grid" id="chart"></div></div>
 <div class="legend">
 <span><i class="dot" style="background:var(--c1)"></i>Forma de programar</span>
@@ -203,7 +207,7 @@ var W=[
 ['Configuración de cortes con planes varios','Llevar a cuartos lo que ya funciona en colgados (varios para configurar, con selección múltiple).'],
 ['Planes varios con fecha anterior (imprenta en reject y block)','Imprenta en block/reject de días anteriores, para remanejos con fechas específicas.'],
 ['Sincronización de ventas','Reever la sincronización: lo que no llega en las horas acordadas sale por Twins; si no, no puede producirse.'],
-['Remanejos USA / ISR / MNK','Poder armarlos por planes varios en L5 (a definir con Marina).']];
+['Remanejos / CAMBIO DE VENTA USA / ISR / MNK','Poder armarlos por planes varios en L5 (pendiente de creación de otro WP VARIOS).']];
 var dev=0,h='';
 G.forEach(function(g){
 var n=g.r.length,c='var(--'+g.k+')',cl=g.dash?'var(--line)':'var(--'+g.k+'l)',dr=g.dash?' dr':'';
@@ -217,11 +221,13 @@ h+='<div class="gr'+dr+'" '+(g.dash?'':'id="b-'+g.k+'" ')+'role="button" tabinde
 +'<div class="gopen"><span class="lo">Abrir ▾</span><span class="lc">Cerrar ▴</span></div></div>'
 +'<div class="gpanel'+dr+'" style="--cc:'+c+';--pbg:'+cl+'">'+g.r.map(function(x,i){return '<div class="pt">'+x+pills(g.m[i])+'</div>'}).join('')+'</div>';});
 document.getElementById('chart').innerHTML=h;
-function setOpen(el,on){el.classList.toggle('open',on);el.setAttribute('aria-expanded',on?'true':'false')}
+var OPEN='Expandir todo para ver detalles <span class="ar">&gt;&gt;</span>',CLOSE='Contraer todo <span class="ar">&lt;&lt;</span>';
+function syncTgl(){var rows=chart.querySelectorAll('.gr'),all=Array.prototype.every.call(rows,function(r){return r.classList.contains('open')});tgl.innerHTML=all?CLOSE:OPEN;tgl.classList.toggle('all',all)}
+function setOpen(el,on){el.classList.toggle('open',on);el.setAttribute('aria-expanded',on?'true':'false');syncTgl()}
 var chart=document.getElementById('chart'),tgl=document.getElementById('tgl');
 chart.addEventListener('click',function(e){var r=e.target.closest('.gr');if(r&&!r.classList.contains('static'))setOpen(r,!r.classList.contains('open'))});
 chart.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var r=e.target.closest('.gr');if(r&&!r.classList.contains('static')){e.preventDefault();setOpen(r,!r.classList.contains('open'))}});
-tgl.addEventListener('click',function(){var rows=chart.querySelectorAll('.gr:not(.static)'),all=Array.prototype.every.call(rows,function(r){return r.classList.contains('open')});Array.prototype.forEach.call(rows,function(r){setOpen(r,!all)});tgl.textContent=all?'Expandir todo':'Contraer todo'});
+tgl.addEventListener('click',function(){var rows=chart.querySelectorAll('.gr:not(.static)'),all=Array.prototype.every.call(rows,function(r){return r.classList.contains('open')});Array.prototype.forEach.call(rows,function(r){setOpen(r,!all)})});
 document.querySelectorAll('.sb').forEach(function(a){a.addEventListener('click',function(){var el=document.querySelector(a.getAttribute('href'));if(el)setOpen(el,true)})});
 document.getElementById('tw').innerHTML=W.map(function(w){return '<div class="tr"><div class="hoy"><i>⭐</i>'+w[0]+'</div><div class="arr">→</div><div class="need">'+w[1]+'</div></div>'}).join('');
 var S=[[dev,'desarrollos a completar','#plan'],[3,'bloques de trabajo','#plan'],[W.length,'procesos hoy en Twins','#twins'],[1,'objetivo: IA','#objetivo']];
