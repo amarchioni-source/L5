@@ -41,7 +41,7 @@ main{max-width:1180px;margin:0 auto;padding:0 16px 56px}
 .stat span{font-size:11.5px;line-height:1.15;max-width:92px;opacity:.95}
 h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;display:flex;align-items:center;gap:10px}
 .card{background:var(--card);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow-x:auto}
-.grid{min-width:840px}
+.grid{min-width:0}
 .hdr{display:grid;grid-template-columns:minmax(0,1fr) 280px;border-bottom:1px solid var(--line);font-size:12px;color:var(--mute);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .hdr div{padding:12px 18px}.hdr .flow{display:flex;justify-content:space-between}
 .grp{padding:14px 18px;font-family:Poppins,sans-serif;font-weight:700;font-size:17px;display:flex;align-items:center;gap:10px}
@@ -75,6 +75,30 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 .legend{display:flex;flex-wrap:wrap;gap:16px;margin:14px 4px 0;font-size:12.5px;color:var(--mute)}
 .legend span{display:flex;align-items:center;gap:6px}
 .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.note{margin:-2px 4px 12px;font-size:13px;color:var(--mute);display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.note button{font:600 12px Inter,system-ui,sans-serif;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer}
+.note button:hover{border-color:var(--mute)}
+.gr{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;border-top:1px solid var(--line);border-left:6px solid var(--cc);min-height:68px;cursor:pointer;transition:background .15s}
+.gr.dr{border-left-style:dashed}
+.gr:hover{background:rgba(127,127,127,.07)}
+.gr.static{cursor:default}.gr.static:hover{background:none}
+.gname{padding:12px 18px;display:flex;gap:12px;align-items:center}
+.chev{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--bgc);color:var(--cc);font-size:12px;transition:transform .2s}
+.gr.open .chev{transform:rotate(90deg)}
+.gr.static .chev{font-size:15px}
+.gname b{display:block;font-family:Poppins,sans-serif;font-size:16.5px;line-height:1.25}
+.gname small{display:block;font-size:12.5px;color:var(--mute);margin-top:3px;line-height:1.4}
+.gpanel{display:none;padding:4px 18px 14px 58px;background:var(--pbg);border-top:1px dashed var(--line);border-left:6px solid var(--cc)}
+.gpanel.dr{border-left-style:dashed}
+.gopen{display:inline-flex;align-items:center;gap:6px;margin-right:18px;padding:7px 14px;border-radius:999px;border:1.5px solid var(--cc);color:var(--cc);font-size:12.5px;font-weight:700;white-space:nowrap;transition:background .15s,color .15s}
+.gopen .lc,.gr.open .gopen .lo{display:none}
+.gr.open .gopen .lc{display:inline}
+.gr:hover .gopen{background:var(--cc);color:#fff}
+@media (max-width:720px){.gopen{margin-right:12px;padding:6px 10px}.gname{padding:12px 12px}}
+.gr.open+.gpanel{display:block}
+.pt{padding:10px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.4}
+.pt:first-child{border-top:0}
+.pt small{display:block;color:var(--mute);font-size:13px;margin-top:3px;line-height:1.45}
 .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .pl{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-style:normal;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
 .pl.d{color:var(--c4);background:var(--c4l);border-color:var(--c4)}
@@ -83,7 +107,7 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 .pl.t{color:#fff;background:var(--red);border-color:var(--red)}
 .pl.c{color:var(--ok);background:var(--okl);border-color:var(--ok)}
 @media (max-width:720px){.tr{grid-template-columns:1fr}.arr{transform:rotate(90deg)}.hero{padding:10px 14px}.hero .eyebrow{display:none}.subbar{flex-wrap:nowrap;overflow-x:auto}.sb{flex:none;white-space:nowrap}.navwrap{width:100%;align-items:flex-start}.stats{flex-wrap:nowrap;overflow-x:auto;width:100%}.stat{flex:none}.stat span{max-width:none;white-space:nowrap}}
-@media (prefers-reduced-motion:reduce){.bar,.tag{animation:none}html{scroll-behavior:auto}.stat{transition:none}}
+@media (prefers-reduced-motion:reduce){.bar,.gbar,.tag{animation:none}html{scroll-behavior:auto}.stat{transition:none}}
 </style>
 </head>
 <body>
@@ -106,19 +130,19 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 <p class="intro">Todo lo que necesitamos desarrollar para programar y producir cuartos 100% en L5.</p>
 
 <h2 class="sec" id="plan">🗺️ El plan, bloque por bloque</h2>
+<div class="note"><span>Cada bloque es un desplegable: toque su fila o el botón «Abrir» para ver los puntos, y tóquelo de nuevo para cerrarlo.</span><button id="tgl" type="button">Expandir todo</button></div>
 <div class="card"><div class="grid" id="chart"></div></div>
 <div class="legend">
 <span><i class="dot" style="background:var(--c1)"></i>Forma de programar</span>
 <span><i class="dot" style="background:var(--c2)"></i>Detalles al programar</span>
 <span><i class="dot" style="background:var(--c3)"></i>Guardia de la despo</span>
-<span><i class="dot" style="border:2px dashed var(--c5)"></i>Cuestión a definir</span>
+<span><i class="dot" style="border:2px dashed var(--c5)"></i>Cuestión a definir (borde punteado)</span>
 <span>⭐ Hoy se hace por Twins</span>
 <span><i class="pl d">Diseño</i>cómo se ve y se usa</span>
 <span><i class="pl l">Lógica</i>cómo decide el sistema</span>
 <span><i class="pl p">En proceso</i>conversado con producción</span>
 <span><i class="pl t">Elimina Twins</i></span>
 <span><i class="pl c">✓ Ya en colgados</i></span>
-<span style="font-style:italic">Sin fechas: el orden de las barras es referencial.</span>
 </div>
 
 <h2 class="sec" id="twins">⭐ Hoy solo se puede hacer por Twins</h2>
@@ -177,14 +201,25 @@ var W=[
 ['Planes varios con fecha anterior (imprenta en reject y block)','Imprenta en block/reject de días anteriores, para remanejos con fechas específicas.'],
 ['Sincronización de ventas','Reever la sincronización: lo que no llega en las horas acordadas sale por Twins; si no, no puede producirse.'],
 ['Remanejos USA / ISR / MNK','Poder armarlos por planes varios en L5 (a definir con Marina).']];
-var dev=0,h='<div class="hdr"><div>Punto</div><div class="flow"><span>Primero</span><span>Después</span></div></div>',idx=0;
+var dev=0,h='';
 G.forEach(function(g){
-var n=g.r.length,span=4,max=12-span;if(!g.dash)dev+=n;
-h+='<div class="grp"'+(g.dash?'':' id="b-'+g.k+'"')+' style="background:var(--'+(g.dash?'line':g.k+'l')+');color:var(--'+(g.dash?'mute':g.k)+')">'+g.t+'</div>';
-g.r.forEach(function(x,i){
-var s=n>1?Math.round(i*max/(n-1)):0,a=g.dash?'':'background:linear-gradient(90deg,var(--'+g.k+'),color-mix(in srgb,var(--'+g.k+') 65%,#fff));';
-h+='<div class="row"><div class="name">'+x+pills(g.m[i])+'</div><div class="track"><div class="bar'+(g.dash?' dash':'')+'" style="--i:'+(idx++)+';--sh:var(--'+g.k+');'+a+'left:calc('+s+'*100%/12 + 2px);width:calc('+span+'*100%/12 - 4px);border-color:var(--'+g.k+')"></div></div></div>';});});
+var n=g.r.length,c='var(--'+g.k+')',cl=g.dash?'var(--line)':'var(--'+g.k+'l)',dr=g.dash?' dr':'';
+if(!g.dash)dev+=n;
+var nd=0,nt=0;
+g.m.forEach(function(m){if(m.charAt(0)==='D')nd++});
+g.r.forEach(function(x){if(x.indexOf('⭐')===0)nt++});
+var sm=g.dash?n+' cuestiones pendientes de definir':n+' puntos · '+nd+' de diseño · '+(n-nd)+' de lógica'+(nt?' · ⭐ '+nt+' eliminan Twins':'');
+h+='<div class="gr'+dr+'" '+(g.dash?'':'id="b-'+g.k+'" ')+'role="button" tabindex="0" aria-expanded="false" style="--cc:'+c+';--bgc:'+cl+'">'
++'<div class="gname"><span class="chev">▶</span><div><b>'+g.t+'</b><small>'+sm+'</small></div></div>'
++'<div class="gopen"><span class="lo">Abrir ▾</span><span class="lc">Cerrar ▴</span></div></div>'
++'<div class="gpanel'+dr+'" style="--cc:'+c+';--pbg:'+cl+'">'+g.r.map(function(x,i){return '<div class="pt">'+x+pills(g.m[i])+'</div>'}).join('')+'</div>';});
 document.getElementById('chart').innerHTML=h;
+function setOpen(el,on){el.classList.toggle('open',on);el.setAttribute('aria-expanded',on?'true':'false')}
+var chart=document.getElementById('chart'),tgl=document.getElementById('tgl');
+chart.addEventListener('click',function(e){var r=e.target.closest('.gr');if(r&&!r.classList.contains('static'))setOpen(r,!r.classList.contains('open'))});
+chart.addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;var r=e.target.closest('.gr');if(r&&!r.classList.contains('static')){e.preventDefault();setOpen(r,!r.classList.contains('open'))}});
+tgl.addEventListener('click',function(){var rows=chart.querySelectorAll('.gr:not(.static)'),all=Array.prototype.every.call(rows,function(r){return r.classList.contains('open')});Array.prototype.forEach.call(rows,function(r){setOpen(r,!all)});tgl.textContent=all?'Expandir todo':'Contraer todo'});
+document.querySelectorAll('.sb').forEach(function(a){a.addEventListener('click',function(){var el=document.querySelector(a.getAttribute('href'));if(el)setOpen(el,true)})});
 document.getElementById('tw').innerHTML=W.map(function(w){return '<div class="tr"><div class="hoy"><i>⭐</i>'+w[0]+'</div><div class="arr">→</div><div class="need">'+w[1]+'</div></div>'}).join('');
 var S=[[dev,'desarrollos a completar','#plan'],[3,'bloques de trabajo','#plan'],[W.length,'procesos hoy en Twins','#twins'],[1,'objetivo: IA','#objetivo']];
 var box=document.getElementById('stats');
