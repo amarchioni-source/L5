@@ -166,22 +166,19 @@ h2.sec{font-family:Poppins,sans-serif;font-size:20px;margin:34px 4px 12px;displa
 var T='<small>',E='</small>';
 function pills(m){var s='<div class="pills"><span class="pl '+(m.charAt(0)==='D'?'d">Diseño':'l">Lógica')+'</span>';if(m.indexOf('P')>0)s+='<span class="pl p">En proceso · Conversado con producción</span>';if(m.indexOf('T')>0)s+='<span class="pl t">Elimina Twins</span>';if(m.indexOf('C')>0)s+='<span class="pl c">✓ Ya en colgados</span>';return s+'</div>'}
 var G=[
-{k:'c1',m:['L','L','LP','D','D','L','L','LT','LTC','L'],t:'1. Forma de programar',r:[
+{k:'c1',m:['L','L','L','LP','D','L','LT','LTC','L'],t:'1. Forma de programar',r:[
+'Examinar en profundidad la explosión de genéricos (genéricos nivel 1, nivel 2, etc.)'+T+'→ Paso previo para poder resolver el caso de un mismo cuarto asignado a dos genéricos diferentes.'+E,
+'Resolver un mismo cuarto asignado a dos genéricos diferentes'+T+'Un mismo cuarto califica para dos genéricos y se asigna a ambas ventas. Ej: nalga con tapa y nalga sin tapa. Se pide poder ponerles prioridades para que el mismo cuarto no se asigne a ambas.<br>→ Requiere examinar antes la explosión de genéricos.'+E,
 'Desvíos por alternativa se descuenten de lo asignado'+T+'El cuarto se asigna a una venta al ingresar; si sale por alternativa, no se descuenta de lo asignado. Ej: la venta pide 100, salen 10 por alternativa, se pesan 90, pero el sistema la marca “completa” y no permite asignar los 10 faltantes. Se pide que lo que salió por alternativa se descuente de lo asignado y permita seguir asignando hasta completar realmente la venta.'+E,
-'Resolver un mismo cuarto asignado a dos genéricos diferentes'+T+'Un mismo cuarto califica para dos genéricos y se asigna a ambas ventas. Ej: nalga con tapa y nalga sin tapa. Se pide poder ponerles prioridades para que el mismo cuarto no se asigne a ambas.'+E,
 'Que el sistema devuelva planes de salida para ordenar a producción',
-'Filtro de calificación en la cabecera de los planes',
-'Lupa en la cabecera del plan para buscar cuartos y seleccionarlos simultáneamente',
+'Agregar filtro de calificación en la cabecera de los planes + lupa en la cabecera del plan para buscar cuartos'+T+'Con la lupa se busca y se pueden seleccionar varios cuartos a la vez arrastrando el mouse sobre las filas, igual que al marcar un rango de celdas en Excel.'+E,
 'Programar filtrando por calificación (combinable con tropa/fecha)',
-'Examinar en profundidad la explosión de genéricos (genéricos nivel 1, nivel 2, etc.)',
 '⭐ Planes varios con fecha anterior, para imprenta en reject y block',
 '⭐ Configuración de cortes a través de planes varios',
 '⭐ Programación del cuarteo <span class="tag">DESARROLLAR PARA ELIMINAR TWINS</span>']},
-{k:'c2',m:['LC','D','D','D','LT','D'],t:'2. Detalles al programar',r:[
+{k:'c2',m:['LC','D','LT','D'],t:'2. Detalles al programar',r:[
 'Programar por fecha de faena',
-'Shipment al lado del número de pedido en ventas programadas',
-'Seleccionar ventas para eliminarlas',
-'Ventas programadas y completas en color rojo',
+'Rediseño del panel simulador despostada online para un seguimiento de ventas más eficiente'+T+'• Agregar Shipment al lado del número de pedido en ventas programadas<br>• Que las ventas completadas programadas se marquen en color rojo<br>• Poder seleccionarlas para eliminarlas'+E,
 '⭐ Reever la sincronización de ventas y del sistema (todo lo que no sincroniza sale por Twins)',
 'Filtrar por tropa al hacer faroles']},
 {k:'c3',m:['D','D','D','D','L','D','D'],t:'3. Guardia de la despo',r:[
